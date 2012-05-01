@@ -10,7 +10,7 @@ class Foreman::Export::EmberUpstart < Foreman::Export::Base
 
     app = self.app || error("app name is required")
     user = "rails"
-    log_root = "/home/rails/#{app}/shared/log/resque.log"
+    log_root = "/home/rails/#{app}/shared/log"
     template_root = self.template
 
     Dir["#{location}/#{app}*.conf"].each do |file|
