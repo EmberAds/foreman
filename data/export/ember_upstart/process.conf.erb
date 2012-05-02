@@ -2,4 +2,4 @@ start on starting <%= app %>-<%= process.name %>
 stop on stopping <%= app %>-<%= process.name %>
 respawn
 
-exec su - <%= user %> -c 'cd <%= engine.directory %>; <%= engine.environment.each_pair.map {|var,env| %{export #{var}="#{env}"; } }.join("") %> <%= process.command %> >> <%= log_root %>/<%= process.name %>.log 2>&1'
+exec su -s /bin/bash -c 'cd <%= engine.directory %>;<% engine.environment.each_pair do |var,env| %> export <%= var.upcase %>=<%= env %>;<% end %> exec "$0" "$@"' <%= user %> -- <%= process.command %> >> <%= log_root %>/<%= process.name %>-<%= num %>.log 2>&1
