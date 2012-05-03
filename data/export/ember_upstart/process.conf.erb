@@ -1,6 +1,7 @@
 start on starting <%= app %>-<%= process.name %>
 stop on stopping <%= app %>-<%= process.name %>
 respawn
+kill signal QUIT
 
 script
   cd <%= engine.directory %>
