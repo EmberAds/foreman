@@ -2,6 +2,11 @@ start on starting <%= app %>-<%= process.name %>
 stop on stopping <%= app %>-<%= process.name %>
 respawn
 kill signal QUIT
+<%# Limit to 900MB soft / 1GB hard ram limit if it's resque process %>
+<% if process.command[/resque/i] %>
+limit rss 943718400 1073741824
+<% end %>
+
 
 script
   cd <%= engine.directory %>
